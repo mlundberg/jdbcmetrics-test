@@ -1,0 +1,3 @@
+jdbcmetrics-test is an integration test project of https://github.com/soulgalore/jdbcmetrics
+
+Test that we can spy/proxy a DataSource for web servers Jetty, Tomcat and Resin. More to come ...
