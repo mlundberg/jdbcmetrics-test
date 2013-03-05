@@ -1,0 +1,9 @@
+.classpath
+.project
+.settings
+target
+work
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/tmp
+trace.db
+resin-data

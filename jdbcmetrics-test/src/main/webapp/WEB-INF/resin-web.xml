@@ -1,0 +1,18 @@
+<web-app xmlns="http://caucho.com/ns/resin">
+
+	<database jndi-name='jdbc/testDSProxied'>
+		<driver type="org.h2.jdbcx.JdbcDataSource">
+			<url>jdbc:h2:~/test</url>
+			<user></user>
+			<password></password>
+		</driver>
+	</database>
+
+	<!-- Resin database conf example, referenceName specifies the real datasource resource name -->
+	<database jndi-name='jdbc/testDS'>
+		<driver type="com.soulgalore.jdbcmetrics.DataSource">
+			<referenceName>jdbc/testDSProxied</referenceName>
+		</driver>
+	</database>
+
+</web-app>

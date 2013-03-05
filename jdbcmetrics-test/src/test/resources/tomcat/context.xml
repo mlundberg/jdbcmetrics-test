@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource
+        name="jdbc/testDSProxied"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxActive="10"
+        maxIdle="5"
+        maxWait="10000"
+        driverClassName="org.h2.Driver"
+        username=""
+        password=""
+        url="jdbc:h2:~/test" />
+        
+    <!-- DataSourceFactory example, referenceName specifies the real datasource resource name -->
+    <Resource
+        name="jdbc/testDS"
+        auth="Container"
+        factory="com.soulgalore.jdbcmetrics.DataSourceFactory"
+        type="javax.sql.DataSource"
+        referenceName="jdbc/testDSProxied" />
+    
+</Context>
