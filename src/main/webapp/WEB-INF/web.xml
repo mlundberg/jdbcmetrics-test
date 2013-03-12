@@ -37,14 +37,14 @@
 	<resource-ref>
         <description>DataSource Reference</description>
         <res-ref-name>jdbc/testDS</res-ref-name>
-        <res-type>javax.sql.ConnectionPoolDataSource</res-type>
+        <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
 
 	<resource-ref>
         <description>DataSource Reference</description>
         <res-ref-name>jdbc/testDSProxied</res-ref-name>
-        <res-type>javax.sql.ConnectionPoolDataSource</res-type>
+        <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
 
