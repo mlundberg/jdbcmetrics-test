@@ -12,8 +12,8 @@ public class ResinResponse extends AbstractResponseTest {
 	
     @BeforeClass
     public static void start() throws Exception {
-    	server.start();
         db.start();
+    	server.start();
     }
 
     @AfterClass

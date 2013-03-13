@@ -29,8 +29,8 @@ public abstract class AbstractResponseTest {
 // BeforeClass must be static - so extend class must implement manually
 //    @BeforeClass
 //    public static void start() throws Exception {
-//    	server.start();
 //        db.start();
+//        server.start();
 //    }
     
     @Test
