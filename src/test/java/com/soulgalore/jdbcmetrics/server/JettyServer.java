@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.net.URI;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.util.log.StdErrLog;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.eclipse.jetty.xml.XmlConfiguration;
@@ -24,9 +23,10 @@ public class JettyServer implements com.soulgalore.jdbcmetrics.server.Server {
         classes.add("org.eclipse.jetty.plus.webapp.PlusConfiguration");
         webAppContext.setConfigurationClasses(classes);
 
-        StdErrLog logger = new StdErrLog("test");
-        org.eclipse.jetty.util.log.Log.setLog(logger);
-        webAppContext.setLogger(logger);
+//        StdErrLog logger = new StdErrLog("test");
+//        logger.setHideStacks(false);
+//        org.eclipse.jetty.util.log.Log.setLog(logger);
+//        webAppContext.setLogger(logger);
         
         server.setHandler(webAppContext);
 
