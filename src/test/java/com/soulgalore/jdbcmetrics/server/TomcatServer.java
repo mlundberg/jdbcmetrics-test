@@ -1,5 +1,8 @@
 package com.soulgalore.jdbcmetrics.server;
 
+import static org.apache.catalina.LifecycleState.DESTROYED;
+import static org.apache.catalina.LifecycleState.STOPPED;
+
 import java.io.File;
 import java.net.URI;
 
@@ -34,8 +37,14 @@ public class TomcatServer implements com.soulgalore.jdbcmetrics.server.Server {
 
 	@Override
 	public void shutDown() throws Exception {
-		tomcat.stop();
-		tomcat.getServer().await();
+		org.apache.catalina.Server server = tomcat.getServer();
+		if (server != null && server.getState() != DESTROYED) {
+			if (server.getState() != STOPPED) {
+				tomcat.stop();
+				server.await();
+			}
+			tomcat.destroy();
+		}
 	}
 
 	@Override

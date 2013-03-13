@@ -21,16 +21,17 @@ public class ResinServer implements Server {
 		server.addPort(http);
 		WebAppEmbed webApp = new WebAppEmbed("/context", "src/main/webapp");
 		server.addWebApp(webApp);
-		server.start();		
+		server.start();
 
 		uri = new URI(webApp.getWebApp().getURL());
 	}
 
 	@Override
 	public void shutDown() throws Exception {
-		server.stop();
-		server.destroy();
-		
+		if (server != null) {
+			server.stop();
+			server.destroy();
+		}
 	}
 
 	@Override
