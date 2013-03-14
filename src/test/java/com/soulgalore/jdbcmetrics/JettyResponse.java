@@ -1,6 +1,5 @@
 package com.soulgalore.jdbcmetrics;
 
-import static org.junit.Assert.fail;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -13,19 +12,12 @@ public class JettyResponse extends AbstractResponseTest {
 	
     @BeforeClass
     public static void start() throws Exception {
-        db.start();
-        try {
-        	server.start();
-        } catch (Exception e) {
-        	e.printStackTrace();
-        	fail();
-        }
+    	start(db, server);
     }
 
     @AfterClass
     public static void shutdown() throws Exception {
-    	server.shutDown();
-    	db.shutDown();
+    	shutDown(db, server);
     }
 
 	@Override

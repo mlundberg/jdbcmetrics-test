@@ -12,14 +12,12 @@ public class TomcatResponse extends AbstractResponseTest {
 	
     @BeforeClass
     public static void start() throws Exception {
-        db.start();
-    	server.start();
+    	start(db, server);
     }
 
-    @AfterClass
-    public static void shutdown() throws Exception {
-    	server.shutDown();
-    	db.shutDown();
+	@AfterClass
+    public static void shutDown() throws Exception {
+		shutDown(db, server);
     }
 
 	@Override

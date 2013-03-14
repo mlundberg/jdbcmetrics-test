@@ -1,10 +1,12 @@
 package com.soulgalore.jdbcmetrics;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+
+import javax.naming.Context;
 
 import org.junit.Test;
 
@@ -26,12 +28,19 @@ public abstract class AbstractResponseTest {
 	
     protected static Database db = new Database();
 
-// BeforeClass must be static - so extend class must implement manually
-//    @BeforeClass
-//    public static void start() throws Exception {
-//        db.start();
-//        server.start();
-//    }
+    protected static void start(Database db, Server server) throws Exception {
+        db.start();
+    	server.start();
+	}
+
+	protected static void shutDown(Database db, Server server) throws Exception {
+    	JDBCMetrics.getInstance().getRegistry().shutdown(); // tomcat hanging threads
+    	server.shutDown();
+    	db.shutDown();
+    	
+    	System.clearProperty(Context.INITIAL_CONTEXT_FACTORY);
+    	System.clearProperty(Context.URL_PKG_PREFIXES);
+	}
     
     @Test
     public void noRequestHeaderShouldResultInNoResponseHeader() throws Exception
@@ -82,11 +91,4 @@ public abstract class AbstractResponseTest {
 		String respStr = webResponse.getContentAsString();
         assertThat(respStr, is(TestServlet.RESPONSE));
     }
-
-// AfterClass must be static - so extend class must implement manually
-//    @AfterClass
-//    public static void shutdown() throws Exception {
-//    	server.shutDown();
-//    	db.shutDown();
-//    }
 }

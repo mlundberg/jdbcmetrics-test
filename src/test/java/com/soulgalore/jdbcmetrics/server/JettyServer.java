@@ -3,6 +3,8 @@ package com.soulgalore.jdbcmetrics.server;
 import java.io.FileInputStream;
 import java.net.URI;
 
+import javax.naming.Context;
+
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -14,7 +16,11 @@ public class JettyServer implements com.soulgalore.jdbcmetrics.server.Server {
 	
 	@Override
 	public void start() throws Exception {
-        server = new Server(0);
+		// Set to avoid problems for jetty jndi (confs from other servers)
+    	System.setProperty(Context.INITIAL_CONTEXT_FACTORY, "org.eclipse.jetty.jndi.InitialContextFactory");
+    	System.setProperty(Context.URL_PKG_PREFIXES, "org.eclipse.jetty.jndi");
+    	
+		server = new Server(0);
         WebAppContext webAppContext = new WebAppContext("src/main/webapp", "/context");
         
         // this is needed for jndi lookup in java:/comp/env/
@@ -23,6 +29,7 @@ public class JettyServer implements com.soulgalore.jdbcmetrics.server.Server {
         classes.add("org.eclipse.jetty.plus.webapp.PlusConfiguration");
         webAppContext.setConfigurationClasses(classes);
 
+        // Setting jettys own log, if not depend on slf4j
 //        StdErrLog logger = new StdErrLog("test");
 //        logger.setHideStacks(false);
 //        org.eclipse.jetty.util.log.Log.setLog(logger);
