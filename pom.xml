@@ -83,7 +83,7 @@
 		<dependency>
 			<groupId>com.soulgalore</groupId>
 			<artifactId>jdbcmetrics</artifactId>
-			<version>0.9.5</version>
+			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
